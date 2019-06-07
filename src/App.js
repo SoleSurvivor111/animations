@@ -3,7 +3,7 @@ import { Animated } from 'react-animated-css';
 import { boxOptions } from './const';
 import './App.css';
 import Box from './Box';
-import ListItem from './ListItem';
+import ItemList from './itemList';
 
 function App() {
   const boxes = boxOptions.map(box => {
@@ -17,13 +17,13 @@ function App() {
   });
   return (
     <div className="App">
-      <div className="task">
+      <div className="task task-1">
         <h1>First task</h1>
         {boxes}
       </div>
       <div className="task task-2">
         <h1>Second task</h1>
-        <ListItem />
+        <ItemList />
       </div>
     </div>
   );

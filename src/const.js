@@ -38,17 +38,18 @@ const initials = [
   'Alex MacCaw',
   'Inving Raun',
 ];
-const steps = [
+export const steps = [
   '14.0',
   '11.1',
-  '10,6',
-  '10,6',
+  '10.6',
+  '10.7',
   '8.6',
   '7.9',
   '7.3',
   '7.0',
   '6.9',
 ];
+
 
 const application = [
   'From Fitbit',
@@ -64,6 +65,9 @@ const application = [
 
 export const peopleList = initials.map((fullName, idx) => ({
   fullName,
-  step: steps[idx],
+  steps: steps[idx],
   application: application[idx],
 }));
+
+const arr = steps.map(i => +i);
+export const max = Math.max.apply(null, arr);
