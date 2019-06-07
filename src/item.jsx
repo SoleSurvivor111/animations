@@ -6,12 +6,13 @@ import delay from 'lodash/delay';
 
 export default class Item extends React.Component {
   state = {
-    itemWidth: '0',
+    itemWidth: Math.round((this.props.i.steps / max * 100 - 15) / 2),
     opacity: '0',
     initialsAnim: '',
     stepsAnim: '',
     applicationAnim: '',
   }
+
 
   handleChooseColor = (num) => {
     const steps = Math.round(+num);
@@ -25,10 +26,10 @@ export default class Item extends React.Component {
   }
 
   handleChangeListItem = () => {
-    const { i } = this.props;
-    const itemWidth = Math.round(i.steps / max * 100 - 15);
+    const { itemWidth } = this.state;
+
     this.setState({
-      itemWidth: `${itemWidth}`,
+      itemWidth: itemWidth * 2,
       opacity: '1',
     })
   }
@@ -44,7 +45,7 @@ export default class Item extends React.Component {
     delay(this.handleChangeListItem, 200 * idx)
     delay(this.handleActivateAnimation, 205 * idx, 'initialsAnim');
     delay(this.handleActivateAnimation, 205 * idx + 20, 'stepsAnim');
-    delay(this.handleActivateAnimation, 205 * idx + 30, 'applicationAnim');
+    delay(this.handleActivateAnimation, 205 * idx + 80, 'applicationAnim');
   }
 
   render() {
@@ -61,12 +62,12 @@ export default class Item extends React.Component {
     return(
       <li
         className="list-item"
+        style={{opacity: opacity}}
       >
         <div className="initials-box"
           style={{
             background: this.handleChooseColor(i.steps),
             flex: `0 1 ${itemWidth}%`,
-            opacity: opacity,
           }}
         >
           <span
