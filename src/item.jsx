@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import delay from 'lodash/delay';
 import {
   max,
-} from './const'
-import delay from 'lodash/delay';
+} from './const';
+
 
 export default class Item extends React.Component {
   state = {
@@ -13,39 +15,36 @@ export default class Item extends React.Component {
     applicationAnim: '',
   }
 
+  componentDidMount() {
+    const { idx } = this.props;
+    delay(this.handleChangeListItem, 200 * idx);
+    delay(this.handleActivateAnimation, 205 * idx, 'initialsAnim');
+    delay(this.handleActivateAnimation, 205 * idx + 20, 'stepsAnim');
+    delay(this.handleActivateAnimation, 205 * idx + 80, 'applicationAnim');
+  }
+
+  handleChangeListItem = () => {
+    const { itemWidth } = this.state;
+    this.setState({
+      itemWidth: itemWidth * 2,
+      opacity: '1',
+    });
+  }
 
   handleChooseColor = (num) => {
     const steps = Math.round(+num);
     if (steps <= 8) {
       return 'orange';
-    } else if (steps > 8 && steps < 13) {
+    } if (steps > 8 && steps < 13) {
       return 'green';
-    } else {
-      return 'blue';
     }
-  }
-
-  handleChangeListItem = () => {
-    const { itemWidth } = this.state;
-
-    this.setState({
-      itemWidth: itemWidth * 2,
-      opacity: '1',
-    })
+    return 'blue';
   }
 
   handleActivateAnimation = (name) => {
     this.setState({
-      [name]:'fadeInLeft'
-    })
-  }
-
-  componentDidMount() {
-    const { idx } = this.props;
-    delay(this.handleChangeListItem, 200 * idx)
-    delay(this.handleActivateAnimation, 205 * idx, 'initialsAnim');
-    delay(this.handleActivateAnimation, 205 * idx + 20, 'stepsAnim');
-    delay(this.handleActivateAnimation, 205 * idx + 80, 'applicationAnim');
+      [name]: 'fadeInLeft',
+    });
   }
 
   render() {
@@ -59,12 +58,13 @@ export default class Item extends React.Component {
     const {
       i,
     } = this.props;
-    return(
+    return (
       <li
         className="list-item"
-        style={{opacity: opacity}}
+        style={{ opacity }}
       >
-        <div className="initials-box"
+        <div
+          className="initials-box"
           style={{
             background: this.handleChooseColor(i.steps),
             flex: `0 1 ${itemWidth}%`,
@@ -92,3 +92,8 @@ export default class Item extends React.Component {
     );
   }
 }
+
+Item.propTypes = {
+  i: PropTypes.object.isRequired,
+  idx: PropTypes.number.isRequired,
+};

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Animated } from 'react-animated-css';
 
 
 export default class Box extends React.Component {
@@ -7,37 +9,46 @@ export default class Box extends React.Component {
   }
 
   handleActivateAnimation = () => {
+    const { isVisible } = this.state;
     this.setState({
-      isVisible: !this.state.isVisible,
-    })
+      isVisible: !isVisible,
+    });
   }
 
   render() {
     const { isVisible } = this.state;
     const {
-      Animated,
       animation,
       color,
+      idx,
     } = this.props;
-    return(
+    return (
       <React.Fragment>
-        <label
+        <span
+          role="menuitem"
+          tabIndex={idx}
           onClick={this.handleActivateAnimation}
         >
           {`${animation} ---click me`}
-        </label>
+        </span>
         <Animated
           animationIn={animation}
           animationOut="zoomOutDown"
           animationInDuration={1000}
           animationOutDuration={1000}
-          isVisible={isVisible}>
+          isVisible={isVisible}
+        >
           <div
             className="box"
-            style={{background: color}}
+            style={{ background: color }}
           />
         </Animated>
       </React.Fragment>
     );
   }
 }
+Box.propTypes = {
+  animation: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  idx: PropTypes.number.isRequired,
+};

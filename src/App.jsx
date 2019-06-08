@@ -1,20 +1,17 @@
 import React from 'react';
-import { Animated } from 'react-animated-css';
 import { boxOptions } from './const';
 import './App.css';
 import Box from './Box';
 import ItemList from './itemList';
 
 function App() {
-  const boxes = boxOptions.map(box => {
-    return (
+  const boxes = boxOptions.map((box, idx) => (
     <Box
       {...box}
       key={box.color}
-      Animated={Animated}
+      idx={idx}
     />
-  )
-  });
+  ));
   return (
     <div className="App">
       <div className="task task-1">

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "lodash": "^4.17.11",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-animated-css": "^1.2.1",
     "react-dom": "^16.8.6",
@@ -29,5 +30,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0"
   }
 }

@@ -1,31 +1,40 @@
 export const boxOptions = [
-  { color: 'blue',
-    animation:'flash',
+  {
+    color: 'blue',
+    animation: 'flash',
   },
-  { color: 'green',
+  {
+    color: 'green',
     animation: 'pulse',
   },
-  { color: 'red',
+  {
+    color: 'red',
     animation: 'rubberBand',
   },
-  { color: 'orange',
+  {
+    color: 'orange',
     animation: 'shake',
   },
-  { color: 'yellow',
+  {
+    color: 'yellow',
     animation: 'headShake',
   },
-  { color: 'chartreuse',
+  {
+    color: 'chartreuse',
     animation: 'swing',
   },
-  { color: 'black',
+  {
+    color: 'black',
     animation: 'tada',
   },
-  { color: 'indigo',
+  {
+    color: 'indigo',
     animation: 'jello',
   },
-  { color: 'violet',
+  {
+    color: 'violet',
     animation: 'bounceIn',
-  }
+  },
 ];
 const initials = [
   'Annie Cook',
@@ -62,12 +71,19 @@ const application = [
   'Healthkit yesterday',
   'From Healthkit',
 ];
-
 export const peopleList = initials.map((fullName, idx) => ({
   fullName,
   steps: steps[idx],
   application: application[idx],
-}));
+})).sort((a, b) => {
+  if (+a.steps < +b.steps) {
+    return 1;
+  }
+  if (+a.steps > +b.steps) {
+    return -1;
+  }
+  return 0;
+});
 
 const arr = steps.map(i => +i);
 export const max = Math.max.apply(null, arr);
